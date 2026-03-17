@@ -66,4 +66,4 @@ def test_add_features_creates_revenue():
     
     # Verify that the values are correct
     expected_revenue = cleaned['quantity'] * cleaned['unit_price']
-    pd.testing.assert_series_equal(featured['revenue'], expected_revenue, check_names=False)p
+    pd.testing.assert_series_equal(featured['revenue'], expected_revenue, check_names=False)

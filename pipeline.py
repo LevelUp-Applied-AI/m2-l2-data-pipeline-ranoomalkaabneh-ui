@@ -22,17 +22,7 @@ OUTPUT_DIR = 'output'
 # ─── Pipeline Functions ───────────────────────────────────────────────────────
 
 def load_data(filepath):
-    """Load sales records from a CSV file.
-
-    Args:
-        filepath (str): Path to the CSV file.
-
-    Returns:
-        pd.DataFrame: Raw sales records DataFrame.
-    """
-
-    """Load sales records from a CSV file."""
-
+   
     if not os.path.exists(filepath):
         raise FileNotFoundError(f"{filepath} not found")
 
@@ -68,14 +58,16 @@ def add_features(df):
     return df
 
 def generate_summary(df):
-    """Compute and return a summary statistics dict."""
-    top_category = df.groupby('product_category')['revenue'].sum().idxmax()
-    return {
-        'total_revenue': df['revenue'].sum(),
-        'avg_order_value': df['revenue'].mean(),
-        'top_category': top_category,
-        'record_count': len(df)
+    """Compute summary statistics. Returns a dict."""
+    summary = {
+        'total_revenue': float(df['revenue'].sum()),
+        'avg_order_value': float(df['revenue'].mean()),
+        'top_category': df.groupby('product_category')['revenue'].sum().idxmax(),
+        'record_count': int(len(df))
     }
+
+    return summary
+    
 
 
 
